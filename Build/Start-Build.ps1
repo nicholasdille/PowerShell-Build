@@ -20,7 +20,8 @@ if (Get-NetAdapter | Where-Object Status -ieq 'Up') {
 # Prepare build environment
 $BHVariables = Get-BuildVariables
 $env:BHBuildSystem   = $BHVariables.BuildSystem
-$env:BHProjectPath   = Get-Item -Path "$PSScriptRoot\.." | Select-Object -ExpandProperty FullName
+#$env:BHProjectPath   = Get-Item -Path "$PSScriptRoot\.." | Select-Object -ExpandProperty FullName
+$env:BHProjectPath   = (Get-Location).Path
 $env:BHBranchName    = $BHVariables.BranchName
 $env:BHCommitMessage = $BHVariables.CommitMessage
 $env:BHBuildNumber   = $BHVariables.BuildNumber
