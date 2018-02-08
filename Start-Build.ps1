@@ -4,7 +4,7 @@
 
 # Install dependencies
 Get-PackageProvider -Name NuGet -ForceBootstrap | Out-Null
-Install-Module -Name 'psake', 'PSDeploy', 'BuildHelpers', 'Pester', 'platyps', 'PSScriptAnalyzer', 'PSCoverage', 'CICD', 'PSGitHub' -Scope CurrentUser -AllowClobber -Force -Verbose
+Install-Module -Name 'psake', 'PSDeploy', 'BuildHelpers', 'Pester', 'platyps', 'PSScriptAnalyzer', 'PSCoverage', 'CICD', 'PSGitHub' -Scope CurrentUser -AllowClobber -Force
 
 # Prepare build environment
 $BHVariables = Get-BuildVariables
