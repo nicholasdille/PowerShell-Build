@@ -11,6 +11,7 @@ version: '{build}'
 skip_tags: true
 
 environment:
+  BuildToolsVersion: '1.0.*'
   StatementCoverageThreshold: 0
   FunctionCoverageThreshold: 0
   SkipUnitTests: true
@@ -29,11 +30,12 @@ build: false
 
 test_script:
 - ps: >-
-    $Response = Invoke-RestMethod -Uri https://api.github.com/repos/nicholasdille/powershell-build/releases
-    $Release = $Response | Where-Object { $_.tag_name -like '0.1.*' } | Sort-Object -Property tag_name -Descending | Select-Object -First 1
-    Invoke-WebRequest -Uri $Release.zipball_url -OutFile Build.zip
-    Expand-Archive -Path .\Build.zip -DestinationPath .
-    Remove-Item -Path .\Build.zip
-    Get-Item -Path nicholasdille-PowerShell-Build-* | Rename-Item -NewName Build
+    $ErrorActionPreference = 'Stop';
+    $Response = Invoke-RestMethod -Uri 'https://api.github.com/repos/nicholasdille/powershell-build/releases';
+    $Release = $Response | Where-Object { $_.tag_name -like $env:BuildToolsVersion } | Sort-Object -Property tag_name -Descending | Select-Object -First 1;
+    Invoke-WebRequest -Uri $Release.zipball_url -OutFile Build.zip;
+    Expand-Archive -Path '.\Build.zip' -DestinationPath .;
+    Remove-Item -Path '.\Build.zip';
+    Get-Item -Path nicholasdille-PowerShell-Build-* | Rename-Item -NewName 'Build';
     .\Build\Start-Build.ps1 -Task Deploy
 ```
