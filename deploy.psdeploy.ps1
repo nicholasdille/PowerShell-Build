@@ -48,13 +48,13 @@ if (
         "Parsing release notes for version $env:ModuleVersion" |
             Write-Host
         $ReleaseNotesSection = Get-Content -Path $env:BHProjectPath\RELEASENOTES.md | ForEach-Object {
-            if ($_ -like "# $env:ModuleVersion") {
+            if ($_ -like "## $env:ModuleVersion") {
                 $output = $true
 
-            } elseif ($_ -like '# *') {
+            } elseif ($_ -like '## *') {
                 $output = $false
             }
-            
+
             if ($output) {
                 $_
             }
