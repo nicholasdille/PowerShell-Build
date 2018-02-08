@@ -41,7 +41,7 @@ Task Deps {
         $RequiredModule = $_
         $Module = $Modules | Where-Object { $_.Name -ieq $RequiredModule.ModuleName }
 
-        if ($Module.Version -gt $RequiredModule.RequiredVersion) {
+        if (-not $Module.Version.IndexOf($RequiredModule.RequiredVersion) -and $Module.Version -gt $RequiredModule.RequiredVersion) {
             Write-Warning "Updated version <$($Module.Version)> found for required module <$($RequiredModule.ModuleName)/$($RequiredModule.RequiredVersion)>"
         }
 
