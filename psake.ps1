@@ -30,6 +30,10 @@ Task Init {
 }
 
 Task Deps {
+    if (-not $Manifest.ContainsKey('RequiredModules') -or -not $Manifest.RequiredModules) {
+        return
+    }
+
     $ModuleNames = $Manifest.RequiredModules.ModuleName
     $Modules = Find-Module -Name $ModuleNames
 
