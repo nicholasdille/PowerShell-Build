@@ -45,7 +45,7 @@ Task Deps {
             Write-Warning "Updated version <$($Module.Version)> found for required module <$($RequiredModule.ModuleName)/$($RequiredModule.RequiredVersion)>"
         }
 
-        Install-Module -Name $RequiredModule.ModuleName -RequiredVersion $RequiredModule.RequiredVersion -AllowClobber -ErrorAction 'Stop' -Force
+        Install-Module -Name $RequiredModule.ModuleName -RequiredVersion $RequiredModule.RequiredVersion -Scope CurrentUser -AllowClobber -ErrorAction 'Stop' -Force
     }
 }
 
