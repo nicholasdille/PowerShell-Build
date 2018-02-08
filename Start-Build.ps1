@@ -2,15 +2,9 @@
     $Task = 'Default'
 )
 
-# Check connectivity
-if (Get-NetAdapter | Where-Object Status -ieq 'Up') {
-    # Install dependencies
-    Get-PackageProvider -Name NuGet -ForceBootstrap | Out-Null
-    Install-Module -Name 'psake', 'PSDeploy', 'BuildHelpers', 'Pester', 'platyps', 'PSScriptAnalyzer', 'PSCoverage', 'CICD', 'PSGitHub' -Scope CurrentUser -AllowClobber -Force
-
-} else {
-    Write-Warning 'No network connectivity. Unable to install/update module dependencies.'
-}
+# Install dependencies
+Get-PackageProvider -Name NuGet -ForceBootstrap | Out-Null
+Install-Module -Name 'psake', 'PSDeploy', 'BuildHelpers', 'Pester', 'platyps', 'PSScriptAnalyzer', 'PSCoverage', 'CICD', 'PSGitHub' -Scope CurrentUser -AllowClobber -Force
 
 # Prepare build environment
 $BHVariables = Get-BuildVariables
