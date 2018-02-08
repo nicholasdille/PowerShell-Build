@@ -12,10 +12,10 @@ skip_tags: true
 
 environment:
   BuildToolsVersion: '1.0.*'
-  StatementCoverageThreshold: 0
-  FunctionCoverageThreshold: 0
-  SkipUnitTests: true
-  SkipDocumentation: true
+  StatementCoverageThreshold: 100
+  FunctionCoverageThreshold: 100
+  #SkipUnitTests: true
+  #SkipDocumentation: true
   #SkipScriptAnalysis: true
   NuGetApiKey:
     secure: EaMePsm8eU/bUd1Ej83dTOAaGja/ht/3IrKC84nbZ9+dQbjeDfbTHk7nM+wp9DgE
@@ -33,6 +33,7 @@ test_script:
     $ErrorActionPreference = 'Stop';
     $Response = Invoke-RestMethod -Uri 'https://api.github.com/repos/nicholasdille/powershell-build/releases';
     $Release = $Response | Where-Object { $_.tag_name -like $env:BuildToolsVersion } | Sort-Object -Property tag_name -Descending | Select-Object -First 1;
+    Write-Host -ForegroundColor Yellow "Using release $($Release.tag_name) of build tools";
     Invoke-WebRequest -Uri $Release.zipball_url -OutFile Build.zip;
     Expand-Archive -Path '.\Build.zip' -DestinationPath .;
     Remove-Item -Path '.\Build.zip';
