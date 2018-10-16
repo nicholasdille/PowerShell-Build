@@ -101,6 +101,7 @@ else
         Write-Host
 }
 
+<#
 # Publish to AppVeyor if we're in AppVeyor
 if (
     $env:BHModulePath -and
@@ -130,3 +131,4 @@ if (
         }
     }
 }
+#>
